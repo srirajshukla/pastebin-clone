@@ -16,7 +16,7 @@ impl<'a> PasteId<'a> {
     /// of a collision depends on the value of `size` and the number of IDs 
     /// generated so far.
     
-    pub fn new(size: usisze) -> PasteId<'static> {
+    pub fn new(size: usize) -> PasteId<'static> {
         let mut id = String::with_capacity(size);
         let mut rng = rand::thread_rng();
         for _ in 0..size {
