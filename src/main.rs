@@ -4,7 +4,7 @@ mod paste_id;
 
 use std::path::Path;
 use std::fs::File;
-use rocket::{Rocket, Data, http::RawStr};
+use rocket::{Rocket, Data};
 use paste_id::PasteId;
 
 #[get("/")]
@@ -35,7 +35,7 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 }
 
 #[get("/<id>")]
-fn retrieve(id: &RawStr) -> Option<File> {
+fn retrieve(id: PasteId) -> Option<File> {
     let filename = format!("upload/{id}", id=id);
     File::open(&filename).ok()
 }
