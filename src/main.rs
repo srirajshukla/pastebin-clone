@@ -3,7 +3,8 @@
 mod paste_id;
 
 use std::path::Path;
-use rocket::{Rocket, Data};
+use std::fs::File;
+use rocket::{Rocket, Data, http::RawStr};
 use paste_id::PasteId;
 
 #[get("/")]
@@ -33,8 +34,14 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     Ok(url)
 }
 
+#[get("/<id>")]
+fn retrieve(id: &RawStr) -> Option<File> {
+    let filename = format!("upload/{id}", id=id);
+    File::open(&filename).ok()
+}
+
 fn rocket() -> Rocket{
-    rocket::ignite().mount("/", routes![index, upload])
+    rocket::ignite().mount("/", routes![index, upload, retrieve])
 }
 
 fn main() {
