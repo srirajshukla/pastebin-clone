@@ -34,6 +34,8 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     Ok(url)
 }
 
+
+// Accepts a get request followed by an id. 
 #[get("/<id>")]
 fn retrieve(id: PasteId) -> Option<File> {
     let filename = format!("upload/{id}", id=id);
