@@ -23,6 +23,9 @@ fn index() -> &'static str{
     "
 }
 
+
+// Accepts a post reequest for pasting some data and returns the id that
+// can be used to access the pastebin.
 #[post("/", data = "<paste>")]
 fn upload(paste: Data) -> Result<String, std::io::Error> {
     let id = PasteId::new(3);
